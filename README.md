@@ -15,7 +15,9 @@ This template uses the **multi-stage build architecture** from , combining resou
 Here are the changes from the base Silverblue image. This image is based on Silverblue and includes these customizations:
 
 ### Added Packages (Build-time)
-- Currently using default packages from base image
+- **CachyOS Kernel**: High-performance kernel optimized with advanced schedulers (BORE/EEVDF)
+- **CachyOS Settings**: Performance-optimized system settings
+- **Kernel Samepage Merging (KSMD)**: Memory optimization daemon
 
 ### Added Applications (Runtime)
 - **CLI Tools (Homebrew)**: Available via custom Brewfiles for user installation
@@ -25,6 +27,8 @@ Here are the changes from the base Silverblue image. This image is based on Silv
 - Custom ujust commands for easy system management
 - Homebrew integration for developer tools
 - Flatpak preinstall configurations for GUI applications
+- CachyOS kernel with performance optimizations
+- KSMD service enabled for improved memory efficiency
 
 *Last updated: 2026-01-21*
 
@@ -139,6 +143,22 @@ Switch to your image:
 sudo bootc switch ghcr.io/your-username/your-repo-name:stable
 sudo systemctl reboot
 ```
+
+**⚠️ Important: Secure Boot Compatibility**
+
+This image uses the CachyOS kernel, which is not officially signed for Secure Boot. You have two options:
+
+1. **Disable Secure Boot** (recommended for most users):
+   - Enter BIOS/UEFI settings during boot
+   - Disable Secure Boot
+   - Save and reboot
+
+2. **Manually sign the kernel** (advanced users):
+   - Generate your own MOK (Machine Owner Key)
+   - Sign the CachyOS kernel with your key
+   - Enroll the key in the system's MOK database
+
+For more information on custom kernel signing, see the [Fedora documentation on Secure Boot](https://docs.fedoraproject.org/en-US/fedora/latest/system-administrators-guide/kernel-module-driver-configuration/Working_with_Kernel_Modules/#sect-signing-kernel-modules-for-secure-boot).
 
 ## Optional: Enable Image Signing
 

@@ -80,7 +80,8 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
     --mount=type=tmpfs,dst=/tmp \
-    /ctx/build/10-build.sh
+    /ctx/build/10-build.sh && \
+    /ctx/build/20-cachyos-kernel.sh
     
 ### LINTING
 ## Verify final image and contents are correct.
