@@ -1,4 +1,4 @@
-# finpilot
+# atmxos
 
 A template for building custom bootc operating system images based on the lessons from [Universal Blue](https://universal-blue.org/) and [Bluefin](https://projectbluefin.io). It is designed to be used manually, but is optimized to be bootstraped by GitHub Copilot. After set up you'll have your own custom Linux. 
 
@@ -9,6 +9,24 @@ This template uses the **multi-stage build architecture** from , combining resou
  Instead, you create your own OS repository based on this template, allowing full customization while leveraging Bluefin's robust build system and shared components.
 
 > Be the one who moves, not the one who is moved.
+
+## What Makes this Raptor Different?
+
+Here are the changes from the base Silverblue image. This image is based on Silverblue and includes these customizations:
+
+### Added Packages (Build-time)
+- Currently using default packages from base image
+
+### Added Applications (Runtime)
+- **CLI Tools (Homebrew)**: Available via custom Brewfiles for user installation
+- **GUI Apps (Flatpak)**: Available via preinstall configurations for user installation
+
+### Configuration Changes
+- Custom ujust commands for easy system management
+- Homebrew integration for developer tools
+- Flatpak preinstall configurations for GUI applications
+
+*Last updated: 2026-01-21*
 
 ## Guided Copilot Mode
 
