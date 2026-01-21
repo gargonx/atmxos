@@ -1,4 +1,4 @@
-# finpilot
+# atmxos
 
 A template for building custom bootc operating system images based on the lessons from [Universal Blue](https://universal-blue.org/) and [Bluefin](https://projectbluefin.io). It is designed to be used manually, but is optimized to be bootstraped by GitHub Copilot. After set up you'll have your own custom Linux. 
 
@@ -9,6 +9,28 @@ This template uses the **multi-stage build architecture** from , combining resou
  Instead, you create your own OS repository based on this template, allowing full customization while leveraging Bluefin's robust build system and shared components.
 
 > Be the one who moves, not the one who is moved.
+
+## What Makes this Raptor Different?
+
+Here are the changes from the base Silverblue image. This image is based on Silverblue and includes these customizations:
+
+### Added Packages (Build-time)
+- **CachyOS Kernel**: High-performance kernel optimized with advanced schedulers (BORE/EEVDF)
+- **CachyOS Settings**: Performance-optimized system settings
+- **Kernel Samepage Merging (KSMD)**: Memory optimization daemon
+
+### Added Applications (Runtime)
+- **CLI Tools (Homebrew)**: Available via custom Brewfiles for user installation
+- **GUI Apps (Flatpak)**: Available via preinstall configurations for user installation
+
+### Configuration Changes
+- Custom ujust commands for easy system management
+- Homebrew integration for developer tools
+- Flatpak preinstall configurations for GUI applications
+- CachyOS kernel with performance optimizations
+- KSMD service enabled for improved memory efficiency
+
+*Last updated: 2026-01-21*
 
 ## Guided Copilot Mode
 
@@ -121,6 +143,22 @@ Switch to your image:
 sudo bootc switch ghcr.io/your-username/your-repo-name:stable
 sudo systemctl reboot
 ```
+
+**⚠️ Important: Secure Boot Compatibility**
+
+This image uses the CachyOS kernel, which is not officially signed for Secure Boot. You have two options:
+
+1. **Disable Secure Boot** (recommended for most users):
+   - Enter BIOS/UEFI settings during boot
+   - Disable Secure Boot
+   - Save and reboot
+
+2. **Manually sign the kernel** (advanced users):
+   - Generate your own MOK (Machine Owner Key)
+   - Sign the CachyOS kernel with your key
+   - Enroll the key in the system's MOK database
+
+For more information on custom kernel signing, see the [Fedora documentation on Secure Boot](https://docs.fedoraproject.org/en-US/fedora/latest/system-administrators-guide/kernel-module-driver-configuration/Working_with_Kernel_Modules/#sect-signing-kernel-modules-for-secure-boot).
 
 ## Optional: Enable Image Signing
 
