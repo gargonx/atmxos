@@ -18,10 +18,14 @@ Here are the changes from the base Silverblue image. This image is based on Silv
 - **CachyOS Kernel**: High-performance kernel optimized with advanced schedulers (BORE/EEVDF)
 - **CachyOS Settings**: Performance-optimized system settings
 - **Kernel Samepage Merging (KSMD)**: Memory optimization daemon
+- **Niri Desktop**: Scrollable-tiling Wayland compositor replacing GNOME
 
 ### Added Applications (Runtime)
 - **CLI Tools (Homebrew)**: Available via custom Brewfiles for user installation
 - **GUI Apps (Flatpak)**: Available via preinstall configurations for user installation
+
+### Removed/Disabled
+- GNOME Shell and related packages (replaced by Niri)
 
 ### Configuration Changes
 - Custom ujust commands for easy system management
@@ -29,8 +33,10 @@ Here are the changes from the base Silverblue image. This image is based on Silv
 - Flatpak preinstall configurations for GUI applications
 - CachyOS kernel with performance optimizations
 - KSMD service enabled for improved memory efficiency
+- Niri compositor with scrollable tiling layout and essential Wayland utilities
+- Default Niri keybindings configured (Mod+Return for terminal, Mod+D for launcher)
 
-*Last updated: 2026-01-21*
+*Last updated: 2026-02-02*
 
 ## Guided Copilot Mode
 
