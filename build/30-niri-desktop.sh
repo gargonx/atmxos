@@ -5,7 +5,9 @@ set -eoux pipefail
 ###############################################################################
 # Niri Desktop Installation
 ###############################################################################
-# This script installs the Niri scrollable-tiling Wayland compositor.
+# This script installs the Niri scrollable-tiling Wayland compositor alongside
+# the existing GNOME desktop. Users can choose between GNOME and Niri at login.
+#
 # Niri is a modern Wayland compositor with a unique scrollable tiling layout.
 # https://github.com/YaLTeR/niri
 #
@@ -16,20 +18,6 @@ set -eoux pipefail
 # Source helper functions
 # shellcheck source=/dev/null
 source /ctx/build/copr-helpers.sh
-
-echo "::group:: Remove GNOME Desktop"
-
-# Remove GNOME Shell and related packages to avoid conflicts
-dnf5 remove -y \
-    gnome-shell \
-    gnome-shell-extension* \
-    gnome-terminal \
-    gnome-software \
-    gnome-control-center \
-    nautilus
-
-echo "GNOME desktop components removed"
-echo "::endgroup::"
 
 echo "::group:: Install Niri Compositor"
 
@@ -169,8 +157,12 @@ echo "Niri configuration created"
 echo "::endgroup::"
 
 echo "Niri desktop installation complete!"
-echo "After booting, select 'Niri' session at the GDM login screen"
-echo "Default keybindings:"
+echo "Both GNOME and Niri are now available as desktop options."
+echo "After booting, select your preferred session at the GDM login screen:"
+echo "  - 'GNOME' for the traditional GNOME desktop"
+echo "  - 'Niri' for the scrollable-tiling compositor"
+echo ""
+echo "Niri default keybindings:"
 echo "  - Mod+Return: Open terminal (alacritty)"
 echo "  - Mod+D: Application launcher (fuzzel)"
 echo "  - Mod+Q: Close window"
