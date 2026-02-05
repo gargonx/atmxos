@@ -67,7 +67,13 @@ echo "::endgroup::"
 
 echo "::group:: Configure Niri"
 
-systemctl --user add-wants niri.service dms
+mkdir -p /usr/lib/systemd/user/default.target.wants
+ln -sf /usr/lib/systemd/user/niri.service /usr/lib/systemd/user/default.target.wants/niri.service
+
+if [ -f /usr/lib/systemd/user/dms.service ]; then
+    ln -sf /usr/lib/systemd/user/dms.service /usr/lib/systemd/user/default.target.wants/dms.service
+fi
+
 # Create default config directory
 mkdir -p /etc/skel/.config/niri
 
