@@ -23,11 +23,10 @@ echo "::group:: Install Niri Compositor"
 
 # Install niri from Fedora repositories (available in Fedora 41+)
 # For development/git versions, use: copr_install_isolated "yalter/niri-git" niri
-# dnf5 install -y niri
-
+#dnf5 install -y niri 
 copr_install_isolated "avengemedia/dms" \
-	niri \
 	dms \
+	niri
 
 echo "Niri compositor installed successfully"
 echo "::endgroup::"
@@ -69,7 +68,6 @@ echo "::endgroup::"
 echo "::group:: Configure Niri"
 
 systemctl --user add-wants niri.service dms
-
 # Create default config directory
 mkdir -p /etc/skel/.config/niri
 
