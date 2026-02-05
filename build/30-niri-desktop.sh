@@ -68,7 +68,15 @@ echo "::endgroup::"
 
 echo "::group:: Configure Niri"
 
-systemctl --user add-wants niri.service dms
+# Enable niri.service for user sessions by creating symlinks
+# Cannot use systemctl during container build, so we create symlinks manually
+mkdir -p /usr/lib/systemd/user/default.target.wants
+ln -sf /usr/lib/systemd/user/niri.service /usr/lib/systemd/user/default.target.wants/niri.service
+
+# Enable dms (display manager service) for niri
+if [ -f /usr/lib/systemd/user/dms.service ]; then
+    ln -sf /usr/lib/systemd/user/dms.service /usr/lib/systemd/user/default.target.wants/dms.service
+fi
 
 # Create default config directory
 mkdir -p /etc/skel/.config/niri
