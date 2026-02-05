@@ -23,7 +23,11 @@ echo "::group:: Install Niri Compositor"
 
 # Install niri from Fedora repositories (available in Fedora 41+)
 # For development/git versions, use: copr_install_isolated "yalter/niri-git" niri
-dnf5 install -y niri
+# dnf5 install -y niri
+
+copr_install_isolated "avengemedia/dms" \
+	niri \
+	dms \
 
 echo "Niri compositor installed successfully"
 echo "::endgroup::"
@@ -34,10 +38,7 @@ echo "::group:: Install Essential Utilities"
 dnf5 install -y \
     alacritty \
     fuzzel \
-    mako \
-    waybar \
     swaybg \
-    swaylock \
     swayidle \
     xdg-desktop-portal-gtk \
     xdg-desktop-portal-gnome \
@@ -63,13 +64,11 @@ Type=Application
 DesktopNames=niri
 NIRIDESKTOP
 
-# Ensure GDM is enabled (it should already be from base image)
-systemctl enable gdm
-
-echo "GDM session configured"
 echo "::endgroup::"
 
 echo "::group:: Configure Niri"
+
+systemctl --user add-wants niri.service dms
 
 # Create default config directory
 mkdir -p /etc/skel/.config/niri
@@ -146,8 +145,6 @@ window-rules {
     // Add custom window rules here
 }
 
-spawn-at-startup "mako"
-spawn-at-startup "waybar"
 spawn-at-startup "swaybg" "-c" "#1a1a1a"
 
 prefer-no-csd
